@@ -1,6 +1,6 @@
-#####################
-#### WhiteOaksABC ###
-#####################
+# ####################
+# ### WhiteOaksABC ###
+# ####################
 
 # This is a GitHub respository containg scripts of a submitted paper
 # for more details or any help, please contact me: thibault.leroy_at_pierroton.inra.fr
