@@ -1,5 +1,5 @@
 -------------------------------------------
-## ### WhiteOaksABC ###
+## WhiteOaksABC ###
 -------------------------------------------
 
  This is a GitHub respository containing scripts and programs used to reconstruct the demographic history of white oaks using an approximate Bayesian computation framework (submitted paper)
@@ -7,7 +7,7 @@
  For more details or any help, please contact me: thibault.leroy_at_pierroton.inra.fr
 
 
-# 1/ PROGRAMS
+### 1/ PROGRAMS
 
 To compile mscalc, the calculator of summary statistics (Ross-Ibarra et al. 2008; 2009; Roux et al. 2011):
 
@@ -24,7 +24,7 @@ priorgen.py -h
 
 
 
-# 2/ DATASETS
+### 2/ DATASETS
 
  All datasets used to perform the ABC are available. For each pair of species, a bpfile, a spinput.txt and a target file are avaible. bpfile & spinput need to be in the directory where you use the coalescent simulator. 
  
@@ -33,7 +33,7 @@ priorgen.py -h
 
 
 
-# 3/ EXAMPLE: Multilocus coalescent simulations:
+### 3/ EXAMPLE: Multilocus coalescent simulations:
 
 - general information concerning the script
 
@@ -56,7 +56,7 @@ priorgen.py bpfile=bpfile n1=0 n1=100 n2=0 n2=100 nA=0 nA=100 tau=0 tau=100 M1=0
 
 
 
-# 4/ EXAMPLE: ABC Model Choice (Rscript):
+### 4/ EXAMPLE: ABC Model Choice (Rscript):
 
 here for each model, we assume : 400 directories containing an ABCstat.txt file in which we have 25,000 lines of summary statistics =10,000,000 simulations/model
 
@@ -120,7 +120,7 @@ res=model_selection_abc_nnet(target=obs, x=x, sumstat=rbind(M1heteroNhomoM,M2hom
 
 
 
-# 5/ EXAMPLE: generate posterior distribution under the best model (Rscript):
+### 5/ EXAMPLE: generate posterior distribution under the best model (Rscript):
 
 library(nnet)
 
