@@ -1,0 +1,11 @@
+
+Error in reading initial conditions :
+	Cannot open file spinput.txt
+Error in reading initial conditions :
+	Cannot open file spinput.txt
+Error in reading initial conditions :
+	Cannot open file spinput.txt
+Error in reading initial conditions :
+	Cannot open file spinput.txt
+Error in reading initial conditions :
+	Cannot open file spinput.txt
