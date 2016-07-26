@@ -1,5 +1,5 @@
 
-## -----------whiteOaksABC-----------
+ ----------- WhiteOaksABC -----------
 
 
  This is a GitHub respository containing scripts and programs used to reconstruct the demographic history of white oaks using an approximate Bayesian computation framework (submitted paper)
