@@ -1,8 +1,8 @@
-# ---------------------------
-# ### WhiteOaksABC ###
-# ---------------------------
+## ---------------------------
+## ### WhiteOaksABC ###
+## ---------------------------
 
- This is a GitHub respository containg scripts of a submitted paper
+ This is a GitHub respository containing scripts and programs used to reconstruct the demographic history of white oaks using an approximate Bayesian computation framework (submitted paper)
  
  For more details or any help, please contact me: thibault.leroy_at_pierroton.inra.fr
 
@@ -116,7 +116,6 @@ obs=matrix(rep(target[ss],100), byrow=T, nrow=100)
 - then perform your ABC analysis [note that tol is the most important paramters = required proportion of points nearest the target values (here 10,000/40,000,000 = 0.00025 best simulations)]
 
 res=model_selection_abc_nnet(target=obs, x=x, sumstat=rbind(M1heteroNhomoM,M2homoNheteroM,M3homoNheteroM,M4homoNheteroM), tol=10000/(4*nrow(M1heteroNhomoM)), noweight=F, rejmethod=F, nb.nnet=20, size.nnet=8, output="OBS_rob-pet_SI_withHeteroNe_vs_IM_AM_SC_withHomoNeHeteroM_100ABC_tol10000_040116")
-
 
 
 
