@@ -9,15 +9,15 @@
 
 ### 1/ PROGRAMS
 
-To compile mscalc, the calculator of summary statistics (Ross-Ibarra et al. 2008; 2009; Roux et al. 2011):
+- To compile mscalc, the calculator of summary statistics (Ross-Ibarra et al. 2008; 2009; Roux et al. 2011):
 
 gcc *.c -lm -o mscalc
 
-To compile msnsam, the coalescent simulator (Ross-Ibarra et al. 2008):
+- To compile msnsam, the coalescent simulator (Ross-Ibarra et al. 2008):
 
 ./clms
 
-Priorgen.py generates prior for 4 different models of speciation (SI, AM, IM, SC)
+- Priorgen.py, a prior generator (4 models: SI, AM, IM, SC; homo/hetero Ne; homo/hetero Nm)
 
 priorgen.py -h
 
@@ -26,26 +26,26 @@ priorgen.py -h
 
 ### 2/ DATASETS
 
- All datasets used to perform the ABC are available. For each pair of species, a bpfile, a spinput.txt and a target file are avaible. bpfile & spinput need to be in the directory where you use the coalescent simulator. 
+ All oak datasets used for our ABC analyses are available. For each pair of species, a bpfile, a spinput.txt and a target file are available. bpfile & spinput need to be in your current directory. 
  
- The target file contains the 19 summary statistics calculated on each real data set.
+ The target file contains the 19 summary statistics calculated on each real dataset.
 
 
 
 
 ### 3/ EXAMPLE: Multilocus coalescent simulations:
 
-- general information concerning the script
+- Introduction
 
 25000 multilocus simulations assuming an AM scenario between Q. robur & Q. petraea [i.e. number of SNPs (=3304) x number of simulations (=25000) = 82600000]
 
-Number of SNPs: 2nd line of the spinput.txt file
+Number of SNPs = 2nd line of the spinput.txt file
 
-Number of simulations: penultimate line of the spinput.txt file
+Number of simulations = penultimate line of the spinput.txt file (so change this number in your spinput.txt if you want to perform more or less simulations)
 
 
 
-- bash script (note that programs are assumed to be in your bin directory):
+- Bash script (note that programs are assumed to be in your bin directory):
 
 mknod myfifo p
 
@@ -61,11 +61,11 @@ priorgen.py bpfile=bpfile n1=0 n1=100 n2=0 n2=100 nA=0 nA=100 tau=0 tau=100 M1=0
 here for each model, we assume : 400 directories containing an ABCstat.txt file in which we have 25,000 lines of summary statistics =10,000,000 simulations/model
 
 library(nnet)
-- import source cv4ABC (Csillery et al. 2012)
+- Import cv4ABC (Csillery et al. 2012)
 
 source("cv4abc.R")
 
-- import observed summary statistics
+- Real dataset: import summary statistics
 
 setwd("./robur-petraea/")
 
@@ -73,7 +73,7 @@ target=read.table("target_rob-pet.txt",skip=2,h=F)
 
 ss=c(2:20)
 
-- import each line of summary statistics corresponding to your simulations
+- Simulations: Import summary statistics
 
 M1heteroNhomoM=M1heteroNheteroM=M2heteroNhomoM=M2heteroNheteroM=M3heteroNhomoM=M3heteroNheteroM=M4heteroNhomoM=M4heteroNheteroM=NULL
 
@@ -89,7 +89,7 @@ for(i in 1:400){
 
 }
 
-- replace all "NaN" [!!! The number of lines of summary statistics need to be the same for the 4 models !!!]
+- Replace all "NaN" [!!! The number of lines of summary statistics need to be the same for the 4 models !!!]
 
 for(i in 1:ncol(M1heteroNhomoM)){
 
@@ -104,16 +104,16 @@ for(i in 1:ncol(M1heteroNhomoM)){
 }
 
 
-- generate a long vector of numbers from the simulations (1=model1, 2=model2..., 4=model4), used as the dependent variable for the regression
+- Generate a long vector of numbers from the simulations (1=model1, 2=model2..., 4=model4), used as the dependent variable for the regression
 
 x=c(rep(1:4, each=nrow(M1heteroNhomoM)))
 
 
-- to perform several ABC analyses (here 100), duplicate your real dataset
+- To perform several ABC analyses, duplicate your real dataset  (here 100x)
 
 obs=matrix(rep(target[ss],100), byrow=T, nrow=100)
 
-- then perform your ABC analysis [note that tol is the most important paramters = required proportion of points nearest the target values (here 10,000/40,000,000 = 0.00025 best simulations)]
+- Perform your ABC analysis [note that tol is the most important paramters = required proportion of points nearest the target values (here 10,000/40,000,000 = 0.00025 best simulations)]
 
 res=model_selection_abc_nnet(target=obs, x=x, sumstat=rbind(M1heteroNhomoM,M2homoNheteroM,M3homoNheteroM,M4homoNheteroM), tol=10000/(4*nrow(M1heteroNhomoM)), noweight=F, rejmethod=F, nb.nnet=20, size.nnet=8, output="OBS_rob-pet_SI_withHeteroNe_vs_IM_AM_SC_withHomoNeHeteroM_100ABC_tol10000_040116")
 
@@ -124,12 +124,12 @@ res=model_selection_abc_nnet(target=obs, x=x, sumstat=rbind(M1heteroNhomoM,M2hom
 
 library(nnet)
 
-- import source cv4estimations.R ((Csillery et al. 2012))
+- Import cv4estimations.R ((Csillery et al. 2012))
 
 source("cv4estimations.R")
 
 
-- import summary statistics (real data set)
+- Real dataset: import summary statistics (real data set)
 
 setwd("./robur-petraea2/")
 
@@ -143,7 +143,10 @@ target=NULL
 
 for(i in 1:ncv){target=rbind(target, tmp)}
 
-- import all summary statistics (simulated data sets) [edit the number of directory (for i in 1:x..) to compile all your priorfile & ABCstat.txt files], please check the number of columns in your files!
+- Simulations: Import summary statistics 
+
+[edit the number of directory (for i in 1:x..) to compile all your priorfile & ABCstat.txt files]
+please check the number of columns in your files!
 
 prior=NULL
 
@@ -166,7 +169,7 @@ for(i in 1:1){
 
 }
 
-- then generate posteriors 
+- Generate posteriors 
 
 prior=na.omit(prior)
 
